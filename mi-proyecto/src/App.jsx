@@ -2,35 +2,38 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Video from './modules/sexo'
+import Form from './modules/form'
+import Listado from './modules/listado'
+
 function App() {
   const [count, setCount] = useState(0)
-
+  const [citaAgregada] = useState({
+    nombre: 'Thomy',
+    dueño: 'Joaquin',
+    fecha: '2025-04-17',
+    hora: '20:02',
+    sintomas: 'Esta trabajando en efsi',
+  });
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <div id="root">
+        <h1>ADMINISTRADOR DE PACIENTES</h1>
+        <div className="container">
+          <div className="row">
+            <div className="one-half column">
+              <h2>Crear mi Cita</h2>
+              <Form/>
+            </div>
+            <div className="one-half column">
+            <h2>Administra tus citas</h2>
+            <Listado citaAgregada = {citaAgregada}/>
+            </div>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Video
-        video = {{title : "BarcaBBV", description : "partido ilegal", url : "https://www.youtube.com/watch?v=BkVjIGepCTc"}}
-      />
+      <script src="/static/js/bundle.js"></script>
+      <script src="/static/js/vendors~main.chunk.js"></script>
+      <script src="/static/js/main.chunk.js"></script>
     </>
   )
 }
