@@ -1,19 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Form from './modules/form'
 import Listado from './modules/listado'
 
-function App() {
-  const [count, setCount] = useState(0)
-  const [citaAgregada] = useState({
-    nombre: 'Thomy',
-    dueño: 'Joaquin',
-    fecha: '2025-04-17',
-    hora: '20:02',
-    sintomas: 'Esta trabajando en efsi',
-  });
+const App = () => {
+  const [arrayCitas, setArrayCitas] = useState([]); 
+
+  useEffect(() => {
+    const citasGuardadas = localStorage.getItem('citas');
+    console.log(citasGuardadas);
+    if (!citasGuardadas) {
+      setArrayCitas(JSON.parse(citasGuardadas));
+    } else {
+      const citasIniciales = [
+        {
+          nombre: "Nina",
+          dueño: "Martin",
+          fecha: "2021-08-05",
+          hora: "08:20",
+          sintomas: "Le duele la pierna"
+        },
+        {
+          nombre: "Sifon",
+          dueño: "Flecha",
+          fecha: "2023-08-05",
+          hora: "09:24",
+          sintomas: "Duerme mucho"
+        },
+        {
+          nombre: "Floki",
+          dueño: "Ari",
+          fecha: "2023-08-05",
+          hora: "16:15",
+          sintomas: "No está comiendo"
+        }
+      ];
+      setArrayCitas(citasIniciales);
+      localStorage.setItem('citas', JSON.stringify(citasIniciales));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('citas', JSON.stringify(arrayCitas));
+  }, [arrayCitas]);
+
+  const sacoDatosDelForm = (data) => {
+    setArrayCitas([...arrayCitas, data]);
+  };
   return (
     <>
         <div id="root">
@@ -22,11 +55,11 @@ function App() {
           <div className="row">
             <div className="one-half column">
               <h2>Crear mi Cita</h2>
-              <Form/>
+              <Form onAgregarTarjeta={sacoDatosDelForm}/>
             </div>
             <div className="one-half column">
             <h2>Administra tus citas</h2>
-            <Listado citaAgregada = {citaAgregada}/>
+            <Listado citas = {arrayCitas}/>
             </div>
           </div>
         </div>
