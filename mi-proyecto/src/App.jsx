@@ -47,6 +47,12 @@ const App = () => {
   const sacoDatosDelForm = (data) => {
     setArrayCitas([...arrayCitas, data]);
   };
+  const eliminarCita = (id) => {
+    const nuevasCitas = [...arrayCitas];
+    nuevasCitas.splice(id, 1);
+    setArrayCitas(nuevasCitas);
+  };
+  
   return (
     <>
         <div id="root">
@@ -59,7 +65,7 @@ const App = () => {
             </div>
             <div className="one-half column">
             <h2>Administra tus citas</h2>
-            <Listado citas = {arrayCitas}/>
+            <Listado citas={arrayCitas} eliminarCita = {eliminarCita} />
             </div>
           </div>
         </div>

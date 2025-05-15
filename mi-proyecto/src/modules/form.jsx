@@ -49,6 +49,7 @@ const Form = ({ onAgregarTarjeta }) => {
 
   return (
     <div>
+      <div className='error'></div>
     <form onSubmit={validarForm}>
       <label>Nombre Mascota</label>
       <input type="text" name="nombre" onChange={detectoCambios} value={formData.nombre} />
@@ -67,8 +68,6 @@ const Form = ({ onAgregarTarjeta }) => {
 
       <button type="submit">Agregar Cita</button>
     </form>
-      <div className='error'>
-      </div>
     </div>
   );
 }
