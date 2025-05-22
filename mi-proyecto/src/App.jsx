@@ -47,7 +47,7 @@ const App = () => {
   }, [arrayCitas]);
 
   const sacoDatosDelForm = (data) => {
-    setArrayCitas((arrayCitas) => [...arrayCitas, data]);
+    setArrayCitas([...arrayCitas, data]);
   };
   const eliminarCita = (id) => {
     const nuevasCitas = [...arrayCitas];
