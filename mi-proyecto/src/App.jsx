@@ -8,9 +8,9 @@ const App = () => {
 
   useEffect(() => {
     const citasGuardadas = localStorage.getItem('citas');
-    console.log(citasGuardadas);
-    if (!citasGuardadas) {
-      setArrayCitas(JSON.parse(citasGuardadas));
+    if (citasGuardadas) {
+        const citas = JSON.parse(citasGuardadas);
+        setArrayCitas(citas); 
     } else {
       const citasIniciales = [
         {
@@ -41,11 +41,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('citas', JSON.stringify(arrayCitas));
+    if (arrayCitas.length > 0) {
+      localStorage.setItem('citas', JSON.stringify(arrayCitas));
+    }
   }, [arrayCitas]);
 
   const sacoDatosDelForm = (data) => {
-    setArrayCitas([...arrayCitas, data]);
+    setArrayCitas((arrayCitas) => [...arrayCitas, data]);
   };
   const eliminarCita = (id) => {
     const nuevasCitas = [...arrayCitas];
